@@ -15,8 +15,8 @@ export const viewport: Viewport = {
 
 
 export const metadata: Metadata = {
-  title: "Trackerfy",
-  description: "See your spotify info in a fun way!",
+  title: "Melodia",
+  description: "See your spotify info in a simple and fun way!",
 };
 
 export default function RootLayout({

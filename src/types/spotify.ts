@@ -21,11 +21,18 @@ export interface SpotifyArtist {
   genres: string[];
 }
 
-export interface FormattedItem {
-  id: string;
-  title: string;
-  image: string;
-  artist: string;
-  genres?: string;
-  album?: string;
+export interface SpotifyProfile {
+  id: string,
+  display_name: string,
+  followers: {
+    total: number
+  },
+  images: {
+    url: string
+  }[]
+}
+
+export interface SpotifyRecentTrackItem {
+  track: SpotifyTrack;
+  played_at: string;
 }

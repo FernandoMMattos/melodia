@@ -8,7 +8,7 @@ const Logo = ({ tag }: Props) => {
   const Tag = tag;
   return (
     <Tag className="font-extrabold select-none">
-      Trackerfy
+      Melodia
     </Tag>
   );
 };
