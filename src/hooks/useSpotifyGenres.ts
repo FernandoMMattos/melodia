@@ -1,15 +1,15 @@
 "use client";
 
+import { getValidAccessToken } from "@/lib/spotifyAuth";
 import { fetchUserTopArtists } from "@/lib/spotifyService";
-import { getAccessToken } from "@/lib/token";
 import { useEffect, useState } from "react";
 
 export const useSpotifyGenres = () => {
   const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
-    const token = getAccessToken();
-    if (!token) return;
+    const token = getValidAccessToken();
+    if (!token) throw new Error("No valid Spotify access token");
 
     const fetchItems = async () => {
       try {
