@@ -3,7 +3,7 @@ import Image from "next/image";
 type Props = {
   image: string;
   title: string;
-  artist: string;
+  artist?: string;
   album?: string;
   genres?: string;
 };

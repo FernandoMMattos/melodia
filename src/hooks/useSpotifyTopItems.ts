@@ -1,20 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchUserTopTracks, fetchUserTopArtists } from "@/lib/spotifyService";
+import { fetchUserTopTracks, fetchUserTopArtists, TimeRange } from "@/lib/spotifyService";
 import { getAccessToken } from "@/lib/token";
 
 type FormattedItem = {
   id: string;
   title: string;
   image: string;
-  artist: string;
+  artist?: string;
   genres?: string;
   album?: string;
 };
-
-export const TIME_OPTIONS = ["short_term", "medium_term", "long_term"] as const;
-export type TimeRange = (typeof TIME_OPTIONS)[number];
 
 export const useSpotifyTopItems = (
   typeList: "songs" | "artists",

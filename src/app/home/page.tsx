@@ -3,7 +3,9 @@
 import Header from "@/components/header";
 import Card from "@/components/card";
 import { useState } from "react";
-import { TimeRange, useSpotifyTopItems } from "@/hooks/useSpotifyTopItems";
+import { useSpotifyTopItems } from "@/hooks/useSpotifyTopItems";
+import { TimeRange } from "@/lib/spotifyService";
+import Footer from "@/components/footer";
 
 const HomePage = () => {
   const [time, setTime] = useState<TimeRange>("short_term");
@@ -14,7 +16,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <section className="flex flex-col items-center">
+      <main className="flex flex-col items-center mb-4">
         <h3 className="text-center p-2 ">
           Your most listened{" "}
           <select
@@ -52,8 +54,8 @@ const HomePage = () => {
             ))}
           </ul>
         )}
-      </section>
-      <footer></footer>
+      </main>
+      <Footer />
     </>
   );
 };

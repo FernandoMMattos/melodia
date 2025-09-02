@@ -1,10 +1,14 @@
-import { SpotifyArtist, SpotifyRecentTrackItem, SpotifyTrack } from "@/types/spotify";
+import {
+  SpotifyArtist,
+  SpotifyRecentTrackItem,
+  SpotifyTrack,
+} from "@/types/spotify";
 
-const TIME_OPTIONS = ["short_term", "medium_term", "long_term"] as const;
+export type TimeRange = "short_term" | "medium_term" | "long_term";
 
 export const getUserTopTracks = async (
   access_token: string,
-  time: typeof TIME_OPTIONS,
+  time: TimeRange,
   limit: string = "50"
 ) => {
   const res = await fetch(
@@ -28,7 +32,7 @@ export const getUserTopTracks = async (
 
 export const fetchUserTopTracks = async (
   token: string,
-  time: typeof TIME_OPTIONS,
+  time: TimeRange,
   limit?: string
 ) => {
   const data = await getUserTopTracks(token, time, limit);
@@ -43,7 +47,7 @@ export const fetchUserTopTracks = async (
 
 export const getUserTopArtists = async (
   access_token: string,
-  time: typeof TIME_OPTIONS,
+  time: TimeRange,
   limit: string = "50"
 ) => {
   const res = await fetch(
@@ -67,7 +71,7 @@ export const getUserTopArtists = async (
 
 export const fetchUserTopArtists = async (
   token: string,
-  time: typeof TIME_OPTIONS,
+  time: TimeRange,
   limit?: string
 ) => {
   const data = await getUserTopArtists(token, time, limit);

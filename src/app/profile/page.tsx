@@ -3,12 +3,12 @@
 import Header from "@/components/header";
 import Image from "next/image";
 import { getAccessToken } from "@/lib/token";
-
 import { useSpotifyProfile } from "@/hooks/useSpotifyProfile";
 import { useSpotifyTopItems } from "@/hooks/useSpotifyTopItems";
 import { useSpotifyRecentTracks } from "@/hooks/useSpotifyRecentTracks";
 import CardProfile from "@/components/cardProfile";
 import { useSpotifyGenres } from "@/hooks/useSpotifyGenres";
+import Footer from "@/components/footer";
 
 const ProfilePage = () => {
   const token = getAccessToken();
@@ -52,7 +52,7 @@ const ProfilePage = () => {
 
             <CardProfile title="Most Listened Artist">
               <p className="text-(--text-muted)">
-                {topItem?.artist.split(",")[0] ?? "No data available"}
+                {topItem?.artist?.split(",")[0] ?? "No data available"}
               </p>
             </CardProfile>
 
@@ -78,6 +78,7 @@ const ProfilePage = () => {
           </section>
         </main>
       )}
+      <Footer />
     </>
   );
 };

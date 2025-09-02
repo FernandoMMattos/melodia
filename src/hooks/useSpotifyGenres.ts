@@ -13,10 +13,10 @@ export const useSpotifyGenres = () => {
 
     const fetchItems = async () => {
       try {
-        const genres = await fetchUserTopArtists(token, "long_term", 10);
+        const genres = await fetchUserTopArtists(token, "long_term", "10");
         const allGenres: string[] = [];
 
-        genres.forEach((genre: any) => {
+        genres.forEach((genre) => {
           if (Array.isArray(genre.genres)) {
             allGenres.push(...genre.genres);
           } else if (genre.genres) {
