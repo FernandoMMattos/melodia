@@ -14,7 +14,7 @@ const generateCodeChallenge = async (codeVerifier: string) => {
 
 export const login = async () => {
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!;
-  const redirectUri = "http://localhost:3000/callback";
+  const redirectUri = "https://melodia-five-azure.vercel.app/callback";
   const scope = [
     "user-read-private",
     "user-read-email",
