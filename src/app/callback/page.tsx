@@ -25,6 +25,10 @@ const CallbackPage = () => {
       if (data.access_token) {
         localStorage.setItem("spotify_access_token", data.access_token);
         localStorage.setItem("spotify_refresh_token", data.refresh_token);
+        localStorage.setItem(
+          "spotify_expires_at",
+          String(Date.now() + data.expiresIn * 1000)
+        );
 
         router.push("/home");
       } else {

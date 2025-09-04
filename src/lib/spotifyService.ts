@@ -98,8 +98,8 @@ export const getUserProfile = async (access_token: string) => {
   return res.json();
 };
 
-export const fetchProfile = async (token: string) => {
-  const data = await getUserProfile(token);
+export const fetchProfile = async (access_token: string) => {
+  const data = await getUserProfile(access_token);
   return {
     id: data.id,
     name: data.display_name,

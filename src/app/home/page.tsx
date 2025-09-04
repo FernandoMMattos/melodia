@@ -20,15 +20,17 @@ const HomePage = () => {
         <h3 className="text-center p-2 ">
           Your most listened{" "}
           <select
+            id="typeList"
             defaultValue="songs"
             onChange={(e) => setTypeList(e.target.value as "songs" | "artists")}
-            className="hover:cursor-pointer hover:text-(--primary) outline-0"
+            className="hover:cursor-pointer hover:text-(--text) text-(--primary) outline-0"
           >
             <option>songs</option>
             <option>artists</option>
           </select>{" "}
         </h3>
         <select
+          id="timeRange"
           defaultValue="short_term"
           onChange={(e) => setTime(e.target.value as TimeRange)}
           className="my-4 border p-2 rounded bg-(--bg-light) border-(--border) hover:cursor-pointer outline-0"

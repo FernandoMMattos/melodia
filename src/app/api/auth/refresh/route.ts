@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const POST = async (req: Request) => {
+export async function POST(req: Request) {
   try {
     const { refresh_token } = await req.json();
 
@@ -11,11 +11,21 @@ export const POST = async (req: Request) => {
       );
     }
 
+    const authHeader =
+      "Basic " +
+      Buffer.from(
+        process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID +
+          ":" +
+          process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET
+      ).toString("base64");
+
     const res = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: authHeader,
+      },
       body: new URLSearchParams({
-        client_id: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!,
         grant_type: "refresh_token",
         refresh_token,
       }),
@@ -24,19 +34,20 @@ export const POST = async (req: Request) => {
     const data = await res.json();
 
     if (!res.ok) {
-      console.error("Spotify refresh failed", data);
       return NextResponse.json(
-        { error: "Refresh failed", details: data },
+        { error: "Spotify refresh failed", details: data },
         { status: 400 }
       );
     }
 
-    return NextResponse.json(data);
+    const expires_at = Date.now() + data.expires_in * 1000;
+
+    return NextResponse.json({ ...data, expires_at }, { status: 200 });
   } catch (err) {
-    console.error("Error in /api/auth/refresh", err);
+    console.error("Erro no refresh:", err);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Refresh failed", details: String(err) },
       { status: 500 }
     );
   }
-};
+}

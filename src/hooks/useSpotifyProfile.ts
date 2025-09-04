@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchProfile } from "@/lib/spotifyService";
+import { getValidAccessToken } from "@/lib/token";
 import { useEffect, useState } from "react";
 
 type FormattedProfile = {
@@ -10,19 +11,21 @@ type FormattedProfile = {
   image: string;
 };
 
-export const useSpotifyProfile = (token: string | null) => {
+export const useSpotifyProfile = () => {
   const [profile, setProfile] = useState<FormattedProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!token) {
-      setError("No token provided");
-      setLoading(false);
-      return;
-    }
-
     const loadProfile = async () => {
+      const token = await getValidAccessToken();
+
+      if (!token) {
+        setError("No token provided");
+        setLoading(false);
+        return;
+      }
+
       try {
         const formatted = await fetchProfile(token);
         setProfile(formatted);
@@ -34,7 +37,7 @@ export const useSpotifyProfile = (token: string | null) => {
     };
 
     loadProfile();
-  }, [token]);
+  }, []);
 
   return { profile, loading, error };
 };

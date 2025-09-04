@@ -5,9 +5,12 @@ import Image from "next/image";
 import SpotifyFullLogo from "../../public/2024-spotify-full-logo/Full_Logo_Green_RGB.svg";
 import SpotifyIcon from "../../public/2024-spotify-logo-icon/Primary_Logo_Green_RGB.svg";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { usePathname } from "next/navigation";
+
 
 const Header = () => {
   const isMobile = useIsMobile();
+  const pathname = usePathname()
 
   return (
     <header>
@@ -21,7 +24,7 @@ const Header = () => {
           <Logo tag="h4" />
         </div>
         <div className="flex items-center gap-2">
-          {window.location.pathname === "/home" ? (
+          {pathname === "/home" ? (
             <Link href="profile">Profile</Link>
           ) : (
             <Link href="home">Home</Link>

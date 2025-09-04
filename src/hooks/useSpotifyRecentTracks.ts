@@ -1,7 +1,7 @@
 "use client";
 
+import { getValidAccessToken } from "@/lib/token";
 import { fetchRecentsTracks } from "@/lib/spotifyService";
-import { getAccessToken } from "@/lib/token";
 import { useEffect, useState } from "react";
 
 type FormattedItem = {
@@ -13,10 +13,10 @@ export const useSpotifyRecentTracks = () => {
   const [recentTracks, setRecentTracks] = useState<FormattedItem[]>([]);
 
   useEffect(() => {
-    const token = getAccessToken();
-    if (!token) return;
-
     const fetchTracks = async () => {
+      const token = await getValidAccessToken();
+      if (!token) return;
+
       try {
         const formatted = await fetchRecentsTracks(token);
         setRecentTracks(formatted);

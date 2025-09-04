@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchUserTopTracks, fetchUserTopArtists, TimeRange } from "@/lib/spotifyService";
-import { getAccessToken } from "@/lib/token";
+import { getValidAccessToken } from "@/lib/token";
 
 type FormattedItem = {
   id: string;
@@ -21,10 +21,11 @@ export const useSpotifyTopItems = (
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = getAccessToken();
-    if (!token) return;
-
+    
     const fetchItems = async () => {
+      const token = await getValidAccessToken();
+      if (!token) return;
+
       try {
         setLoading(true);
 

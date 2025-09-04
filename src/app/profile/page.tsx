@@ -2,7 +2,6 @@
 
 import Header from "@/components/header";
 import Image from "next/image";
-import { getAccessToken } from "@/lib/token";
 import { useSpotifyProfile } from "@/hooks/useSpotifyProfile";
 import { useSpotifyTopItems } from "@/hooks/useSpotifyTopItems";
 import { useSpotifyRecentTracks } from "@/hooks/useSpotifyRecentTracks";
@@ -11,13 +10,10 @@ import { useSpotifyGenres } from "@/hooks/useSpotifyGenres";
 import Footer from "@/components/footer";
 
 const ProfilePage = () => {
-  const token = getAccessToken();
-
-  const { profile, loading, error } = useSpotifyProfile(token);
+  const { profile, loading, error } = useSpotifyProfile();
   const { items: topItems } = useSpotifyTopItems("songs", "long_term");
   const { recentTracks } = useSpotifyRecentTracks();
   const { genres } = useSpotifyGenres();
-
   const topItem = topItems.length > 0 ? topItems[0] : null;
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;

@@ -21,6 +21,7 @@ export const login = async () => {
     "user-top-read",
     "playlist-read-private",
     "user-read-recently-played",
+    "offline_access"
   ].join(" ");
 
   const codeVerifier = crypto.randomUUID() + crypto.randomUUID();
