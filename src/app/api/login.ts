@@ -20,8 +20,7 @@ export const login = async () => {
     "user-read-email",
     "user-top-read",
     "playlist-read-private",
-    "user-read-recently-played",
-    "offline_access"
+    "user-read-recently-played"
   ].join(" ");
 
   const codeVerifier = crypto.randomUUID() + crypto.randomUUID();
