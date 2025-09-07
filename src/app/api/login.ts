@@ -14,13 +14,13 @@ const generateCodeChallenge = async (codeVerifier: string) => {
 
 export const login = async () => {
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!;
-  const redirectUri = "https://melodia-five-azure.vercel.app/callback";
+  const redirectUri = process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI;
   const scope = [
     "user-read-private",
     "user-read-email",
     "user-top-read",
     "playlist-read-private",
-    "user-read-recently-played"
+    "user-read-recently-played",
   ].join(" ");
 
   const codeVerifier = crypto.randomUUID() + crypto.randomUUID();
@@ -33,7 +33,7 @@ export const login = async () => {
     `response_type=code` +
     `&client_id=${clientId}` +
     `&scope=${encodeURIComponent(scope)}` +
-    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+    `&redirect_uri=${redirectUri}` +
     `&code_challenge_method=S256` +
     `&code_challenge=${codeChallenge}`;
 
